@@ -5,18 +5,18 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
-
+ const API_URL = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setIsAnimated(false);
     
     try {
-      const res = await fetch('http://localhost:5000/api/v1/carbon/calculate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      });
+      const res = await fetch(`${API_URL}/api/v1/carbon/calculate`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(form)
+});
       const result = await res.json();
       setData(result);
       // Data aane ke baad animation trigger karne ke liye chota sa timeout
